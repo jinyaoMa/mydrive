@@ -57,9 +57,6 @@ module.exports = {
         win: {
           icon: "./public/app.ico"
         },
-        mac: {
-          icon: "./public/app.png"
-        },
         productName: "mydrive"
       }
     },

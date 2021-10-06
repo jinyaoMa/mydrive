@@ -7,36 +7,61 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "electron:build": "vue-cli-service electron:build",
+    "lint": "vue-cli-service lint",
     "electron:serve": "vue-cli-service electron:serve",
+    "electron:build": "vue-cli-service electron:build",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
   "main": "background.js",
   "dependencies": {
-    "core-js": "^3.6.5",
-    "element-plus": "^1.1.0-beta.19",
-    "unplugin-vue-components": "^0.15.6",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "core-js": "^3.9.0",
+    "svg-sprite-loader": "^5.2.1",
+    "vue-i18n": "^8.22.4",
+    "vue-router": "^3.5.1",
+    "vue": "^2.6.12",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@electron/remote": "^2.0.1",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "electron": "13.0.0",
-    "electron-devtools-installer": "^3.1.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-cli-plugin-electron-builder": "~2.1.1"
+    "@intlify/vue-i18n-loader": "^1.0.0",
+    "@vue/cli-plugin-babel": "~4.5.11",
+    "@vue/cli-plugin-eslint": "~4.5.11",
+    "@vue/cli-plugin-router": "~4.5.11",
+    "@vue/cli-plugin-vuex": "~4.5.11",
+    "@vue/cli-service": "~4.5.11",
+    "@vue/eslint-config-standard": "^6.0.0",
+    "axios": "^0.21.1",
+    "babel-eslint": "^10.1.0",
+    "electron": "^11.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^7.6.0",
+    "eslint": "^7.20.0",
+    "less-loader": "^5.0.0",
+    "less": "^4.1.1",
+    "vue-cli-plugin-axios": "~0.0.4",
+    "vue-cli-plugin-electron-builder": "^2.0.0-rc.6",
+    "vue-cli-plugin-i18n": "~1.0.1",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/recommended",
+      "@vue/standard"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not dead"
+    "last 2 versions"
   ]
 }

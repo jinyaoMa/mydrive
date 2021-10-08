@@ -1,4 +1,5 @@
 {
+  "appName": "My Drive",
   "welcome": "Welcome to the world of Electron-Vue!",
   "localeChangerTitle": "Language:",
   "a message": "Hello, i'm rendering process!",

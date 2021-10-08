@@ -1,26 +1,15 @@
 <template>
   <div id="app">
     <div id="app-bar">
-      <div id="app-title">
-        vue-cli-electron-template
-      </div>
+      <div id="app-title">vue-cli-electron-template</div>
       <div id="app-action">
-        <div
-          class="app-action-button"
-          @click="win.minimize()"
-        >
+        <div class="app-action-button" @click="win.minimize()">
           <svg-icon icon-class="app-hidden" />
         </div>
-        <div
-          class="app-action-button"
-          @click="autoMaximize()"
-        >
+        <div class="app-action-button" @click="autoMaximize()">
           <svg-icon icon-class="app-fullsize" />
         </div>
-        <div
-          class="app-action-button button-red"
-          @click="win.close()"
-        >
+        <div class="app-action-button button-red" @click="win.close()">
           <svg-icon icon-class="app-exit" />
         </div>
       </div>
@@ -28,41 +17,43 @@
 
     <div id="content">
       <div id="routers">
-        <router-link to="/">
-          Home
-        </router-link> |
-        <router-link to="/about">
-          About
-        </router-link>
+        <router-link to="/"> Home </router-link> |
+        <router-link to="/about"> About </router-link>
       </div>
       <router-view />
-      <locale-changer style="position: fixed; right: 30px; top: 50px;" />
+      <locale-changer style="position: fixed; right: 30px; top: 50px" />
     </div>
   </div>
 </template>
 
 <script>
-import { remote } from 'electron'
-import localeChanger from 'components/localeChanger'
+import { remote, ipcRenderer as ipc } from "electron";
+import localeChanger from "components/localeChanger";
 
 export default {
   components: {
-    localeChanger
+    localeChanger,
   },
-  data () {
+  data() {
     return {
       win: remote.getCurrentWindow(),
-      originSize: true
-    }
+      originSize: true,
+    };
   },
   methods: {
-    autoMaximize () {
-      if (this.originSize) this.win.maximize()
-      else this.win.restore()
-      this.originSize = !this.originSize
-    }
-  }
-}
+    autoMaximize() {
+      if (this.originSize) this.win.maximize();
+      else this.win.restore();
+      this.originSize = !this.originSize;
+    },
+  },
+  created() {
+    ipc.on("getCurrentLocale-reply", (event, locale) => {
+      this.$i18n.locale = locale;
+    });
+    ipc.send("getCurrentLocale");
+  },
+};
 </script>
 
 <style lang="less">
@@ -72,19 +63,28 @@ body {
 
 // 取消一些默认效果，使得应用看起来更加原生
 // Cancel default effects to make apps look more native
-input { outline: none; }
+input {
+  outline: none;
+}
 
-a { outline: none; text-decoration: none; -webkit-user-drag: none; color: #B2CCD6; }
+a {
+  outline: none;
+  text-decoration: none;
+  -webkit-user-drag: none;
+  color: #b2ccd6;
+}
 
-img { -webkit-user-drag: none; }
+img {
+  -webkit-user-drag: none;
+}
 
 #app {
   height: 100vh;
   width: 100vw;
-  background-color: #2D3A41;
-  color: #B2CCD6;
+  background-color: #2d3a41;
+  color: #b2ccd6;
   // ok
-  font-family: 'Microsoft YaHei', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  font-family: "Microsoft YaHei", "Avenir", "Helvetica", "Arial", "sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-user-select: none;
@@ -96,7 +96,7 @@ img { -webkit-user-drag: none; }
 
 #app-bar {
   background-color: #263238;
-  color: #B2CCD6;
+  color: #b2ccd6;
   display: flex;
   // 如果你想让某区域可以拖动，将其设为drag
   // 但是设为drag的区域无法被点击，请注意
@@ -125,8 +125,8 @@ img { -webkit-user-drag: none; }
 
 .app-action-button {
   padding: 0 8px;
-  color: #FFF;
-  transition: .2s ease;
+  color: #fff;
+  transition: 0.2s ease;
   opacity: 0.7;
   line-height: 32px;
 }
@@ -137,7 +137,7 @@ img { -webkit-user-drag: none; }
 }
 
 .app-action-button:active {
-  background-color: #3A4A52;
+  background-color: #3a4a52;
 }
 
 .button-red:hover {
@@ -145,7 +145,7 @@ img { -webkit-user-drag: none; }
 }
 
 .button-red:active {
-  background-color: #C11818;
+  background-color: #c11818;
 }
 
 #routers {
@@ -154,7 +154,7 @@ img { -webkit-user-drag: none; }
 
   a {
     font-weight: bold;
-    color: #2B8059;
+    color: #2b8059;
 
     &.router-link-exact-active {
       color: #42b983;

@@ -1,4 +1,5 @@
 {
+  "appName": "我的磁盘",
   "welcome": "欢迎来到Electron-Vue的世界！",
   "localeChangerTitle": "选择语言：",
   "a message": "你好，我是渲染进程！",

@@ -45,7 +45,6 @@ class MainWindow {
         nodeIntegration: true, // 允许渲染进程使用node.js / node integration, allow renderer process use node.js!
         contextIsolation: false
       },
-      // eslint-disable-next-line no-undef
       icon: `${__static}/favicon.ico`,
       frame: false
     })

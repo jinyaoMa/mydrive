@@ -2,16 +2,17 @@
   <div>
     <div
       class="locale-changer home-button app-action-button"
-      @click="showOptions=!showOptions"
+      @click="showOptions = !showOptions"
     >
-      {{ $t('localeChangerTitle') }} <span style="font-weight: bold;">{{ $i18n.locale }}</span>
+      {{ $t("localeChangerTitle") }}
+      <span style="font-weight: bold">{{ $i18n.locale }}</span>
     </div>
     <div v-if="showOptions">
       <div
         v-for="(lang, idx) in options"
         :key="idx"
         class="locale-changer home-button app-action-button"
-        :class="$i18n.locale===lang?'selected':''"
+        :class="$i18n.locale === lang ? 'selected' : ''"
         @click="changeLang(lang)"
       >
         {{ lang }}
@@ -21,29 +22,29 @@
 </template>
 
 <script>
-const ipc = require('electron').ipcRenderer
+const ipc = require("electron").ipcRenderer;
 
 export default {
-  name: 'LocaleChanger',
-  data () {
+  name: "LocaleChanger",
+  data() {
     return {
       options: this.$i18n.availableLocales,
-      showOptions: false
-    }
+      showOptions: false,
+    };
   },
   methods: {
-    changeLang (lang) {
-      this.$i18n.locale = lang
-      ipc.send('appLanguageChange', lang)
-      this.showOptions = false
-    }
-  }
-}
+    changeLang(lang) {
+      this.$i18n.locale = lang;
+      ipc.send("appLanguageChange", lang);
+      this.showOptions = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
 .selected {
-  background-color: #0F8154;
+  background-color: #0f8154;
 }
 
 .locale-changer {

@@ -38,7 +38,7 @@ const options = {
   router,
   store,
   i18n,
-  render: h => h(App)
+  render: (h) => h(App)
 }
 
 // Finally, returns the new vue instance

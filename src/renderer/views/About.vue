@@ -1,11 +1,9 @@
 <template>
-  <div style="text-align: center; ">
-    <div style="font-size: 72px; font-weight: bolder;">
-      Hi!
-    </div>
+  <div style="text-align: center">
+    <div style="font-size: 72px; font-weight: bolder">Hi!</div>
     <div
       class="home-button app-action-button"
-      style="margin: 40px auto 10px auto;"
+      style="margin: 40px auto 10px auto"
       @click="sendRequest"
     >
       {{ $t(buttonText) }}
@@ -14,36 +12,36 @@
     <h1>vue-cli-electron-template</h1>
     <h2>Author: PurePeace</h2>
     <h2
-      style="cursor: pointer; color: #FFF;"
+      style="cursor: pointer; color: #fff"
       @click="
         () => {
-          const { shell } = require('electron')
-          shell.openExternal(link)
+          const { shell } = require('electron');
+          shell.openExternal(link);
         }
       "
     >
-      Github: <span style="user-select: text;">{{ link }}</span>
+      Github: <span style="user-select: text">{{ link }}</span>
     </h2>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      link: 'https://github.com/Pure-Peace',
-      buttonText: 'requestDemo.ready'
-    }
+      link: "https://github.com/Pure-Peace",
+      buttonText: "requestDemo.ready",
+    };
   },
   methods: {
     // Async request
-    async sendRequest () {
-      console.log(this.$backend)
-      this.buttonText = 'requestDemo.requesting'
-      const res = await this.$backend.apiV2.demoGetV2()
-      this.buttonText = 'requestDemo.requestSuccess'
-      console.log(res)
-    }
-  }
-}
+    async sendRequest() {
+      console.log(this.$backend);
+      this.buttonText = "requestDemo.requesting";
+      const res = await this.$backend.apiV2.demoGetV2();
+      this.buttonText = "requestDemo.requestSuccess";
+      console.log(res);
+    },
+  },
+};
 </script>

@@ -10,7 +10,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  lintOnSave: process.env.NODE_ENV !== 'production',
+  lintOnSave: false, // process.env.NODE_ENV !== 'production',
   pages: {
     app: {
       title: 'mydrive',

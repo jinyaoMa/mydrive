@@ -5,13 +5,28 @@ class MenuManager {
     this.appManager = appManager
     this.windowManager = appManager.windowManager
     this.translator = appManager.translator
+    this.contextMenu = null
   }
 
   AppTrayMenu() {
     const $t = this.translator.get()
 
+    const handleLanguageClick = (locale) => {
+      if (this.contextMenu) {
+        const temp = ['zh', 'en']
+        temp.forEach((code) => {
+          if (code !== locale) {
+            this.contextMenu.getMenuItemById(code).checked = false
+          }
+        })
+        this.appManager.languageChange(locale)
+        this.windowManager.mainWindow.win.destroy()
+        this.windowManager.mainWindow.createWindow()
+      }
+    }
+
     // Menu template
-    const template = [
+    this.contextMenu = Menu.buildFromTemplate([
       {
         label: $t('trayMenu.reset'),
         click: () => {
@@ -26,7 +41,7 @@ class MenuManager {
       },
       {
         label: $t('trayMenu.settings'),
-        click: () => {}
+        click() {}
       },
       {
         type: 'separator'
@@ -36,14 +51,20 @@ class MenuManager {
         enabled: false
       },
       {
+        id: 'zh',
         label: $t('trayMenu.language.zh'),
         type: 'checkbox',
-        checked: process.env.VUE_APP_DEFAULT_LANGUAGE === 'zh'
+        click() {
+          handleLanguageClick('zh')
+        }
       },
       {
+        id: 'en',
         label: $t('trayMenu.language.en'),
         type: 'checkbox',
-        checked: process.env.VUE_APP_DEFAULT_LANGUAGE === 'en'
+        click() {
+          handleLanguageClick('en')
+        }
       },
       {
         type: 'separator'
@@ -54,8 +75,11 @@ class MenuManager {
           app.exit()
         }
       }
-    ]
-    return Menu.buildFromTemplate(template)
+    ])
+
+    this.contextMenu.getMenuItemById(this.translator.locale).checked = true
+
+    return this.contextMenu
   }
 }
 

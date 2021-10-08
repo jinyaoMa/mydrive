@@ -1,15 +1,16 @@
 import { ipcMain, dialog } from 'electron'
 
 class IpcEvents {
-  create (appManager) {
+  create(appManager) {
     this.appManager = appManager
 
     /* 翻译器函数
     Translator function */
-    const $t = appManager.translator.get()
+    const translator = appManager.translator
+    const $t = translator.get()
 
     // ipc通信示例 / ipc demo
-    ipcMain.on('showDialog', (sys, msg) => {
+    ipcMain.on('showDialog', (event, msg) => {
       dialog.showMessageBox({
         type: 'info',
         title: '收到消息！',
@@ -21,8 +22,13 @@ class IpcEvents {
       })
     })
 
+    // renderer check for current locale
+    ipcMain.on('getCurrentLocale', (event) => {
+      event.reply('getCurrentLocale-reply', translator.locale)
+    })
+
     // 语言变更事件 / language change event
-    ipcMain.on('appLanguageChange', (sys, lang) => {
+    ipcMain.on('appLanguageChange', (event, lang) => {
       this.appManager.languageChange(lang)
     })
   }

@@ -38,6 +38,15 @@ class AppManager {
       const iconPath = path.join(__static, 'favicon.ico')
       const trayIcon = nativeImage.createFromPath(iconPath)
       this.tray = new Tray(trayIcon)
+      this.tray.on('click', () => {
+        if (!this.windowManager.mainWindow.win) {
+          this.windowManager.mainWindow.createWindow()
+        }
+
+        // Execute electron window method
+        this.windowManager.mainWindow.win.restore()
+        this.windowManager.mainWindow.win.moveTop()
+      })
       this.setAppTrayMenu()
     } catch (err) {
       console.error('Failed to create app tray, error:', err)
@@ -48,17 +57,9 @@ class AppManager {
   创建托盘菜单 */
   setAppTrayMenu() {
     const menu = this.menuManager.AppTrayMenu()
-    this.tray.setToolTip(process.env.VUE_APP_DEFAULT_LANGUAGE)
+    const $t = this.translator.get()
+    this.tray.setToolTip($t('appName'))
     this.tray.setContextMenu(menu)
-    this.tray.on('click', () => {
-      if (!this.windowManager.mainWindow.win) {
-        this.windowManager.mainWindow.createWindow()
-      }
-
-      // Execute electron window method
-      this.windowManager.mainWindow.win.restore()
-      this.windowManager.mainWindow.win.moveTop()
-    })
   }
 }
 

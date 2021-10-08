@@ -63,6 +63,18 @@
       "space-before-function-paren": [
         "off",
         "never"
+      ],
+      "quotes": [
+        "off",
+        "double"
+      ],
+      "semi": [
+        "off",
+        "always"
+      ],
+      "comma-dangle": [
+        "off",
+        "always"
       ]
     }
   },

@@ -18,7 +18,7 @@
     <div id="content">
       <div id="routers">
         <router-link to="/"> Home </router-link> |
-        <router-link to="/about"> About </router-link>
+        <router-link to="/settings"> About </router-link>
       </div>
       <router-view />
       <locale-changer style="position: fixed; right: 30px; top: 50px" />

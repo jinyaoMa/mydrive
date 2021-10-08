@@ -1,8 +1,4 @@
 const path = require('path')
-const dotenv = require('dotenv')
-
-dotenv.config() // setup .env
-
 const IS_PROD = process.env.NODE_ENV === 'production'
 
 function resolve(dir) {
@@ -66,7 +62,7 @@ module.exports = {
     },
     // i18n config
     i18n: {
-      locale: process.env.VUE_APP_DEFAULT_LANGUAGE,
+      locale: 'zh',
       fallbackLocale: 'en',
       localeDir: 'locales',
       enableInSFC: false

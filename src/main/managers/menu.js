@@ -25,23 +25,31 @@ class MenuManager {
       }
     }
 
+    const handleWindowReset = (path = '#/') => {
+      if (this.windowManager.mainWindow.win) {
+        this.windowManager.mainWindow.initBrowserPage(path)
+      } else {
+        this.windowManager.mainWindow.createWindow(path)
+      }
+
+      // Execute electron window method
+      this.windowManager.mainWindow.win.restore()
+      this.windowManager.mainWindow.win.moveTop()
+    }
+
     // Menu template
     this.contextMenu = Menu.buildFromTemplate([
       {
         label: $t('trayMenu.reset'),
-        click: () => {
-          if (!this.windowManager.mainWindow.win) {
-            this.windowManager.mainWindow.createWindow()
-          }
-
-          // Execute electron window method
-          this.windowManager.mainWindow.win.restore()
-          this.windowManager.mainWindow.win.moveTop()
+        click() {
+          handleWindowReset()
         }
       },
       {
         label: $t('trayMenu.settings'),
-        click() {}
+        click() {
+          handleWindowReset('#/settings')
+        }
       },
       {
         type: 'separator'
@@ -71,7 +79,7 @@ class MenuManager {
       },
       {
         label: $t('trayMenu.exit'),
-        click: () => {
+        click() {
           app.exit()
         }
       }

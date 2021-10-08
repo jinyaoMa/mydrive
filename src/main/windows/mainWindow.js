@@ -8,16 +8,16 @@ class MainWindow {
     this.win = win
   }
 
-  initBrowserPage() {
+  initBrowserPage(path) {
     // Dev or not
     if (process.env.WEBPACK_DEV_SERVER_URL) {
-      this.win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+      this.win.loadURL(process.env.WEBPACK_DEV_SERVER_URL + path)
       /* 开发环境下自启动开发者工具
         start developer tools in the development environment */
       this.win.webContents.openDevTools({ mode: 'detach' })
     } else {
       createProtocol('app')
-      this.win.loadURL('app://./index.html')
+      this.win.loadURL('app://./index.html' + path)
     }
 
     this.win.on('closed', () => {
@@ -26,7 +26,7 @@ class MainWindow {
     })
   }
 
-  createWindow() {
+  createWindow(path = '#/') {
     if (this.win) {
       console.warn('window is already exists!')
       return
@@ -50,7 +50,7 @@ class MainWindow {
     })
 
     this.win = win
-    this.initBrowserPage()
+    this.initBrowserPage(path)
     this.setWindowMenu()
   }
 

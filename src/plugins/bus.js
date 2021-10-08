@@ -3,7 +3,7 @@ const { clipboard } = require('electron')
 
 const install = (Vue, options) => {
   const Bus = new Vue({
-    data () {
+    data() {
       return {
         process,
         clipboard, // electron clipboard object
@@ -18,16 +18,16 @@ const install = (Vue, options) => {
         }
       }
     },
-    created () {
+    created() {
       this.init()
       this.events()
     },
     methods: {
-      init () {
+      init() {
         this.win = this.$electron.remote.getCurrentWindow()
         this.dialog = this.$electron.remote.dialog
       },
-      events () {
+      events() {
         this.win.on('blur', () => {
           this.status.isBlur = true
           this.status.isFocus = false
@@ -38,28 +38,28 @@ const install = (Vue, options) => {
           this.status.isBlur = false
         })
       },
-      getAppManager () {
+      getAppManager() {
         return this.$electron.remote.getGlobal('appManager')
       },
-      appGetPath (pathName = 'desktop') {
+      appGetPath(pathName = 'desktop') {
         return this.$electron.remote.app.getPath(pathName)
       },
 
       // router
-      changePage (item) {
+      changePage(item) {
         this.router.push({
           name: item.name
         })
       },
 
       // ---
-      emit (event, ...args) {
+      emit(event, ...args) {
         this.$emit(event, ...args)
       },
-      on (event, callback) {
+      on(event, callback) {
         this.$on(event, callback)
       },
-      off (event, callback) {
+      off(event, callback) {
         this.$off(event, callback)
       }
     }

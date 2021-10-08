@@ -9,7 +9,7 @@ import MenuManager from './menu'
 import Translator from '../plugins/translator'
 
 class AppManager {
-  constructor () {
+  constructor() {
     this.translator = new Translator()
     this.windowManager = new WindowManager(this)
     this.menuManager = new MenuManager(this)
@@ -18,12 +18,12 @@ class AppManager {
 
   /* 初始化app，创建窗口及托盘
   Initialize the app, create windows and tray */
-  initApp () {
+  initApp() {
     this.windowManager.createAllWindows()
     this.createAppTray()
   }
 
-  languageChange (lang) {
+  languageChange(lang) {
     this.translator.changeLang(lang)
 
     /* 重新设置托盘菜单（变更语言）
@@ -33,9 +33,9 @@ class AppManager {
 
   /* Create app tray
   创建托盘 */
-  createAppTray () {
+  createAppTray() {
     try {
-      const iconPath = path.join(__static, 'app.ico')
+      const iconPath = path.join(__static, 'favicon.ico')
       const trayIcon = nativeImage.createFromPath(iconPath)
       this.tray = new Tray(trayIcon)
       this.setAppTrayMenu()
@@ -46,10 +46,19 @@ class AppManager {
 
   /* Create tray menu
   创建托盘菜单 */
-  setAppTrayMenu () {
+  setAppTrayMenu() {
     const menu = this.menuManager.AppTrayMenu()
-    this.tray.setToolTip('运行中！Still Working!')
+    this.tray.setToolTip(process.env.VUE_APP_DEFAULT_LANGUAGE)
     this.tray.setContextMenu(menu)
+    this.tray.on('click', () => {
+      if (!this.windowManager.mainWindow.win) {
+        this.windowManager.mainWindow.createWindow()
+      }
+
+      // Execute electron window method
+      this.windowManager.mainWindow.win.restore()
+      this.windowManager.mainWindow.win.moveTop()
+    })
   }
 }
 

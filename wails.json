@@ -1,11 +1,20 @@
 {
   "name": "mydrive",
-  "outputfilename": "mydrive",
   "assetdir": "frontend/dist",
   "frontend:build": "npm run build",
   "frontend:install": "npm install",
-  "author": {
+  "frontend:dev": "",
+  "wailsjsdir": "./frontend",
+  "version": "2",
+  "Path": "",
+  "BuildDir": "",
+  "outputfilename": "mydrive.exe",
+  "OutputType": "",
+  "Platform": "",
+  "Author": {
     "name": "jinyaoMa",
     "email": "jinyao.ma@outlook.com"
-  }
+  },
+  "debounceMS": 100,
+  "devserverurl": "http://localhost:34115"
 }

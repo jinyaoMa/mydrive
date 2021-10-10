@@ -33,21 +33,21 @@ func main() {
 		Frameless:         true,
 		StartHidden:       false,
 		HideWindowOnClose: false,
-		RGBA:              &options.RGBA{255,255,255,0},
+		RGBA:              &options.RGBA{255, 255, 255, 0},
 		Assets:            assets,
-		LogLevel:   logger.DEBUG,
-		OnStartup:  app.startup,
-		OnDomReady: app.domReady,
-		OnShutdown: app.shutdown,
+		LogLevel:          logger.DEBUG,
+		OnStartup:         app.startup,
+		OnDomReady:        app.domReady,
+		OnShutdown:        app.shutdown,
 		Bind: []interface{}{
 			app,
 		},
 		// Windows platform specific options
 		// Windows平台特定选项
 		Windows: &windows.Options{
-			WebviewIsTransparent:          true,
-			WindowIsTranslucent: true,
-			DisableWindowIcon:             false,
+			WebviewIsTransparent: true,
+			WindowIsTranslucent:  true,
+			DisableWindowIcon:    false,
 		},
 		// Mac: &mac.Options{
 		// 	WebviewIsTransparent:          true,
@@ -55,7 +55,7 @@ func main() {
 		// 	TitleBar:                      mac.TitleBarHiddenInset(),
 		// },
 	})
-	
+
 	if err != nil {
 		log.Fatal(err)
 	}

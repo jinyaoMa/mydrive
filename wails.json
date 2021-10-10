@@ -1,0 +1,11 @@
+{
+  "name": "mydrive",
+  "outputfilename": "mydrive",
+  "assetdir": "frontend/dist",
+  "frontend:build": "npm run build",
+  "frontend:install": "npm install",
+  "author": {
+    "name": "jinyaoMa",
+    "email": "jinyao.ma@outlook.com"
+  }
+}

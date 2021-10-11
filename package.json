@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "go install github.com/wailsapp/wails/v2/cmd/wails@v2.0.0-beta.10 && cd frontend && npm install && npm run build",
+    "doctor": "wails doctor",
     "dev": "wails dev",
     "build": "wails build"
   },
